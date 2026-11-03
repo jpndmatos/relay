@@ -1,0 +1,86 @@
+{
+  "date": "2026-11-03",
+  "scope": "Authenticated production build with the same six seeded incidents on local ASP.NET hosts",
+  "lighthouseVersion": "12.8.2",
+  "throttling": {
+    "rttMs": 150,
+    "throughputKbps": 1638.4,
+    "cpuSlowdownMultiplier": 4
+  },
+  "before": {
+    "label": "before",
+    "url": "http://localhost:5186",
+    "authenticated": true,
+    "lighthouseVersion": "12.8.2",
+    "scores": {
+      "performance": 81,
+      "accessibility": 100,
+      "best-practices": 100
+    },
+    "metrics": {
+      "first-contentful-paint": {
+        "value": 2716.606,
+        "display": "2.7\u00c2\u00a0s"
+      },
+      "largest-contentful-paint": {
+        "value": 3624.212,
+        "display": "3.6\u00c2\u00a0s"
+      },
+      "total-blocking-time": {
+        "value": 0,
+        "display": "0\u00c2\u00a0ms"
+      },
+      "cumulative-layout-shift": {
+        "value": 0.12386594713021604,
+        "display": "0.124"
+      },
+      "speed-index": {
+        "value": 2716.606,
+        "display": "2.7\u00c2\u00a0s"
+      },
+      "total-byte-weight": {
+        "value": 440958,
+        "display": "Total size was 431\u00c2\u00a0KiB"
+      }
+    },
+    "opportunities": []
+  },
+  "after": {
+    "label": "after",
+    "url": "http://localhost:5187",
+    "authenticated": true,
+    "lighthouseVersion": "12.8.2",
+    "scores": {
+      "performance": 98,
+      "accessibility": 100,
+      "best-practices": 100
+    },
+    "metrics": {
+      "first-contentful-paint": {
+        "value": 1370.3340000000003,
+        "display": "1.4\u00c2\u00a0s"
+      },
+      "largest-contentful-paint": {
+        "value": 2285.668,
+        "display": "2.3\u00c2\u00a0s"
+      },
+      "total-blocking-time": {
+        "value": 0,
+        "display": "0\u00c2\u00a0ms"
+      },
+      "cumulative-layout-shift": {
+        "value": 0.0009450360886773888,
+        "display": "0.001"
+      },
+      "speed-index": {
+        "value": 1370.3340000000003,
+        "display": "1.4\u00c2\u00a0s"
+      },
+      "total-byte-weight": {
+        "value": 191058,
+        "display": "Total size was 187\u00c2\u00a0KiB"
+      }
+    },
+    "opportunities": []
+  }
+}

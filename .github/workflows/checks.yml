@@ -1,0 +1,60 @@
+name: Relay checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Frontend unit tests and both builds
+        working-directory: web
+        run: |
+          npm ci
+          npm test
+          npm run build
+          npm run build:demo
+      - name: Domain and real SQLite HTTP integration tests
+        run: dotnet test Relay.sln -c Release --logger trx --results-directory TestResults
+      - name: Publish complete application
+        run: dotnet publish src/Relay.Api -c Release --no-restore -o /tmp/relay-publish
+      - name: Start .NET demo host
+        env:
+          ASPNETCORE_ENVIRONMENT: Development
+        run: |
+          dotnet run --project src/Relay.Api -c Release --no-build --no-launch-profile --urls http://localhost:5180 > /tmp/relay.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:5180/health; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/relay.log
+          exit 1
+      - name: Browser workflows, accessibility and real-time transport
+        working-directory: web
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:e2e
+      - name: Upload verification artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relay-verification
+          path: |
+            TestResults
+            web/test-results
+          retention-days: 7

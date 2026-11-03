@@ -1,0 +1,10 @@
+**/bin
+**/obj
+**/node_modules
+**/data
+**/test-results
+**/playwright-report
+**/.env*
+**/.hallmark
+web/dist
+src/Relay.Api/wwwroot

@@ -1,0 +1,42 @@
+{
+  "scope": "app",
+  "preserved": [
+    "Existing portfolio visual system and CV download in index.html:183",
+    "Existing portfolio project-card structure in index.html:423"
+  ],
+  "introduced": [
+    "Independent .NET 10 solution in projects/relay",
+    "Coral-inspired incident workspace with self-hosted General Sans",
+    "Explicit static demo in demo/relay"
+  ],
+  "inferred": {
+    "audience": "Engineering teams and portfolio reviewers",
+    "use": "Coordinate an incident through recovery",
+    "tone": "Technical, calm and utilitarian"
+  },
+  "material": {
+    "real": [
+      "Working application",
+      "Actual generated metrics from records",
+      "Captured application screenshots"
+    ],
+    "demo": [
+      "Fictional people, services and incidents, explicitly labelled"
+    ],
+    "absent": [
+      "Customer claims",
+      "Uptime guarantees",
+      "Testimonials"
+    ]
+  },
+  "review": {
+    "mode": "in-thread",
+    "resolved": [
+      "EF event insertion semantics",
+      "Blank GUID query filters",
+      "Input preservation during pending writes",
+      "Tooltip horizontal overflow"
+    ],
+    "remaining": "No Floor failures; marked live-count and identifier exceptions reviewed"
+  }
+}

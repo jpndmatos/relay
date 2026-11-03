@@ -1,0 +1,26 @@
+[
+ {
+  "scope": "app",
+  "shape": "app screen",
+  "theme": "coral",
+  "axes": "light/grotesk-sans/warm",
+  "hero": "none",
+  "nav": "top workspace tabs",
+  "footer": "source and portfolio links",
+  "imagery": "real application screenshots",
+  "signature": "severity queue with shared recovery timeline",
+  "sections": [
+   "queue",
+   "services",
+   "activity",
+   "public status"
+  ],
+  "waived": [
+   "38iii: live queue result count",
+   "64: record identifier codes"
+  ],
+  "prompt": "Complete .NET proficiency portfolio project",
+  "date": "2026-11-03",
+  "mode": "build"
+ }
+]

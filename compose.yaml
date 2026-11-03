@@ -1,0 +1,15 @@
+services:
+  relay:
+    build: .
+    ports:
+      - "127.0.0.1:5180:8080"
+    environment:
+      # Local, opt-in sample workspace. Production uses HTTPS and Demo__Enabled=false.
+      ASPNETCORE_ENVIRONMENT: Development
+      Demo__Enabled: "true"
+      ConnectionStrings__Relay: "Data Source=/app/data/relay.db;Default Timeout=10"
+    volumes:
+      - relay-data:/app/data
+    restart: unless-stopped
+volumes:
+  relay-data:

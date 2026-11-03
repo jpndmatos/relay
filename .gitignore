@@ -1,0 +1,14 @@
+**/bin/
+**/obj/
+**/node_modules/
+**/test-results*/
+**/playwright-report/
+**/dist-demo/
+**/dist/
+src/Relay.Api/wwwroot/
+**/data/
+**/*.db*
+**/.env*
+**/TestResults/
+**/*.tsbuildinfo
+tmp/

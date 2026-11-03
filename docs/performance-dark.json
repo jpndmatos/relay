@@ -1,0 +1,38 @@
+{
+  "label": "dark",
+  "url": "http://localhost:5188",
+  "authenticated": true,
+  "lighthouseVersion": "12.8.2",
+  "scores": {
+    "performance": 98,
+    "accessibility": 100,
+    "best-practices": 100
+  },
+  "metrics": {
+    "first-contentful-paint": {
+      "value": 1522.348,
+      "display": "1.5 s"
+    },
+    "largest-contentful-paint": {
+      "value": 2290.022,
+      "display": "2.3 s"
+    },
+    "total-blocking-time": {
+      "value": 10,
+      "display": "10 ms"
+    },
+    "cumulative-layout-shift": {
+      "value": 0.001087492354857537,
+      "display": "0.001"
+    },
+    "speed-index": {
+      "value": 1522.348,
+      "display": "1.5 s"
+    },
+    "total-byte-weight": {
+      "value": 193217,
+      "display": "Total size was 189 KiB"
+    }
+  },
+  "opportunities": []
+}
