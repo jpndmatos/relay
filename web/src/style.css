@@ -221,8 +221,9 @@ label > textarea {
   gap: var(--space-xs);
   text-decoration: none;
   font-size: 30px;
-  font-weight: 600;
-  letter-spacing: -0.06em;
+  font-family: var(--font-outlier);
+  font-weight: 400;
+  letter-spacing: -0.09em;
   line-height: 1;
 }
 .brand-mark {

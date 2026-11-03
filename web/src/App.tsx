@@ -922,18 +922,9 @@ export default function App() {
       </main>
       <footer className="app-footer">
         <span>
-          Relay <span className="footer-slash">/</span> Incident response, with
-          a clear trail.
+          Relay <span className="footer-slash">/</span> Incident response
+          workspace.
         </span>
-        <a
-          href={
-            import.meta.env.VITE_PORTFOLIO_URL ||
-            "https://jpndmatos.github.io/Portfolio/#projects"
-          }
-        >
-          Back to portfolio
-          <ArrowUpRight size={12} aria-hidden="true" />
-        </a>
         <a href={sourceUrl} target="_blank" rel="noreferrer">
           Standalone source
           <ArrowUpRight size={12} aria-hidden="true" />
