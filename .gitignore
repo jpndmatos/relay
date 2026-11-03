@@ -12,3 +12,4 @@ src/Relay.Api/wwwroot/
 **/TestResults/
 **/*.tsbuildinfo
 tmp/
+**/.hallmark/
