@@ -4,7 +4,7 @@ import AxeBuilder from '@axe-core/playwright';
 test.beforeEach(async ({ page }) => {
   await page.goto('./');
   await page.getByRole('button', { name: 'Explore as commander' }).click();
-  await expect(page.getByRole('heading', { name: 'Keep the response moving.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Incidents', exact: true })).toBeVisible();
   await expect(page.getByRole('table').first()).toBeVisible();
 });
 

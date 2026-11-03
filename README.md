@@ -125,6 +125,8 @@ The suite covers state transitions, resolution deadlines, late resolution, input
 
 Current local results: **25 .NET tests, 18 frontend unit tests, 20 full-host browser workflows and 13 static-demo browser workflows passed**. The browser runs include desktop and mobile; network checks are skipped where duplicated or inapplicable to the static build.
 
+The workspace fills the viewport. The incident queue, service list and activity list scroll inside their panels, keeping navigation and primary actions visible. On phones, expanding Service watch gives it the workspace; collapsing it returns to the queue. Layout checks cover 320×568 through 1440×900.
+
 Frontend refinements, request caching and keyboard behaviour are documented in [the frontend notes](docs/frontend.md). An authenticated mobile Lighthouse comparison and its reproducible settings are in [the performance record](docs/performance.md).
 
 Playwright covers the full recovery flow, role switching, service creation, URL filters, desktop/mobile layouts, accessibility checks with axe and updates between two live browser sessions. Browser tests create their own uniquely named records. Run them against a disposable demo database, rather than an operational workspace.

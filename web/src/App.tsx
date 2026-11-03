@@ -431,7 +431,7 @@ export default function App() {
           )}
         </div>
       </header>
-      <div className="demo-bar">
+      <div className="demo-bar" role="region" aria-label="Workspace mode">
         <div className="demo-bar-inner">
           <ShieldCheck size={15} aria-hidden="true" />
           <strong>
@@ -507,10 +507,10 @@ export default function App() {
                   </Breadcrumb>
                   <h1>
                     {view === "services"
-                      ? "Know what you run."
+                      ? "Services"
                       : view === "activity"
-                        ? "Every update, in the open."
-                        : "Keep the response moving."}
+                        ? "Activity"
+                        : "Incidents"}
                   </h1>
                   <p>
                     {view === "services"
@@ -669,7 +669,12 @@ export default function App() {
                                 </button>
                               </Empty>
                             ) : (
-                              <div className="table-wrap">
+                              <div
+                                className="table-wrap"
+                                tabIndex={0}
+                                role="region"
+                                aria-label="Workspace table"
+                              >
                                 <table className="incident-table">
                                   <thead>
                                     <tr>
@@ -794,14 +799,6 @@ export default function App() {
                             directory={() => nav("services")}
                           />
                         </div>
-                        <div className="bottom-grid">
-                          <RecoveryChart overview={data.overview} />
-                          <RecentActivity
-                            overview={data.overview}
-                            openIncident={openIncident}
-                            compact
-                          />
-                        </div>
                       </>
                     )}
                     {view === "services" && (
@@ -818,7 +815,12 @@ export default function App() {
                             incident.
                           </Empty>
                         ) : (
-                          <div className="table-wrap">
+                          <div
+                            className="table-wrap"
+                            tabIndex={0}
+                            role="region"
+                            aria-label="Workspace table"
+                          >
                             <table className="service-table">
                               <thead>
                                 <tr>
@@ -964,20 +966,27 @@ function QueueFilters({
             key={value}
             className={filters.status === value ? "selected" : ""}
             aria-pressed={filters.status === value}
+            aria-label={label}
             onClick={() => setFilters({ status: value })}
           >
-            {label}
+            <span className="full-label">{label}</span>
+            <span className="compact-label">
+              {value === "active" ? "Active" : value === "all" ? "All" : label}
+            </span>
           </button>
         ))}
         <button
           type="button"
           className={`mine-filter ${filters.assigneeId ? "selected" : ""}`}
           aria-pressed={!!filters.assigneeId}
+          aria-label="Assigned to me"
+          title="Assigned to me"
           onClick={() =>
             setFilters({ assigneeId: filters.assigneeId ? "" : user.id })
           }
         >
-          Assigned to me
+          <span className="full-label">Assigned to me</span>
+          <span className="compact-label">Mine</span>
         </button>
       </div>
       <div className="queue-filters">

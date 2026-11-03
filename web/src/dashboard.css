@@ -1,0 +1,467 @@
+html,
+body,
+#root {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+#root {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.topbar,
+.demo-bar,
+.app-footer {
+  flex: none;
+}
+.topbar-inner {
+  min-height: 58px;
+  gap: 18px;
+}
+.brand {
+  font-size: 27px;
+}
+.brand-mark {
+  width: 27px;
+  height: 27px;
+}
+.demo-bar-inner {
+  min-height: 32px;
+  padding-block: 4px;
+}
+.demo-bar-inner > span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-container {
+  min-height: 0;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 16px;
+  padding-bottom: 12px;
+  gap: 12px;
+  overflow: auto;
+}
+.app-container:has(.workspace-grid),
+.app-container:has(.directory),
+.app-container:has(.create-panel) {
+  overflow: hidden;
+}
+.page-heading {
+  flex: none;
+  margin: 0;
+  gap: 16px;
+}
+.page-heading h1 {
+  font-size: 26px;
+}
+.page-heading p {
+  font-size: 12px;
+  margin-top: 5px;
+}
+.metrics {
+  flex: none;
+  margin: 0;
+  padding-block: 12px;
+}
+.metrics > div {
+  padding-block: 0;
+}
+.metrics dd {
+  font-size: 28px;
+}
+.metrics dd span {
+  font-size: 12px;
+  margin-top: 4px;
+}
+.workspace-grid {
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+  gap: 16px;
+  grid-template-columns: minmax(0, 1fr) 270px;
+}
+.queue-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.queue-heading {
+  flex: none;
+  padding: 10px 16px;
+}
+.queue-tabs {
+  flex: none;
+  min-height: 40px;
+  padding-inline: 16px;
+}
+.queue-filters {
+  flex: none;
+  padding: 10px 16px;
+  gap: 8px;
+}
+.queue-panel > .table-wrap {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.table-wrap thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--color-paper);
+}
+.table-wrap td {
+  padding-block: 12px;
+}
+.queue-footer {
+  flex: none;
+  padding: 8px 16px;
+}
+.watch-panel {
+  min-height: 0;
+  overflow: auto;
+  padding: 16px;
+  overscroll-behavior: contain;
+}
+.watch-disclosure > summary {
+  position: sticky;
+  top: -16px;
+  z-index: 2;
+  background: var(--color-cotton);
+  padding-block: 10px;
+}
+.directory {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.directory > .section-heading,
+.directory-note {
+  flex: none;
+}
+.directory > .table-wrap {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+.activity-view {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+.app-footer {
+  min-height: 28px;
+  padding-block: 6px;
+  font-size: 12px;
+}
+.create-panel {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  margin: 0;
+}
+.create-panel > .section-heading {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: var(--color-cotton);
+}
+.create-panel .form-actions {
+  position: sticky;
+  bottom: 0;
+  padding-block: 12px;
+  background: var(--color-cotton);
+  z-index: 2;
+}
+.app-container:has(.create-panel) > .metrics,
+.app-container:has(.create-panel) > .workspace-grid,
+.app-container:has(.create-panel) > .directory,
+.app-container:has(.create-panel) > .activity-view {
+  display: none;
+}
+.queue-panel > .empty {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 24px;
+}
+@media (max-width: 1050px) and (min-width: 761px) {
+  .workspace-grid {
+    grid-template-columns: minmax(0, 1fr) 240px;
+  }
+  .watch-panel {
+    display: block;
+    padding: 12px;
+  }
+}
+@media (max-width: 760px) {
+  .metrics,
+  .app-footer {
+    display: none;
+  }
+  :root {
+    --gutter: 16px;
+  }
+  .topbar-inner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    min-height: 0;
+    padding: 8px 16px 0;
+    gap: 4px 8px;
+  }
+  .brand {
+    font-size: 25px;
+  }
+  .brand-mark {
+    width: 25px;
+    height: 25px;
+  }
+  .user-menu {
+    min-height: 44px;
+    justify-self: end;
+    margin: 0;
+  }
+  .user-menu > div > strong {
+    display: none;
+  }
+  .user-menu .avatar {
+    display: none;
+  }
+  .topbar nav {
+    grid-column: 1/-1;
+    justify-self: stretch;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    min-height: 42px;
+  }
+  .topbar nav button {
+    min-height: 42px;
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+  .demo-bar-inner {
+    min-height: 28px;
+    padding-block: 3px;
+    gap: 6px;
+  }
+  .demo-bar-inner > span {
+    display: none;
+  }
+  .demo-bar-inner > strong {
+    font-size: 12px;
+  }
+  .demo-reset {
+    min-height: 28px;
+  }
+  .app-container {
+    padding-block: 10px;
+    gap: 8px;
+  }
+  .page-heading {
+    gap: 8px;
+    align-items: center;
+  }
+  .page-heading h1 {
+    font-size: 21px;
+  }
+  .page-heading p {
+    display: none;
+  }
+  .page-heading .breadcrumb {
+    font-size: 12px;
+  }
+  .page-heading > .button {
+    min-height: 44px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .metrics {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding-block: 8px;
+  }
+  .metrics > div {
+    min-width: 0;
+    padding-inline: 6px;
+  }
+  .metrics dt {
+    font-size: 12px;
+    min-height: 26px;
+  }
+  .metrics dd {
+    font-size: 23px;
+  }
+  .metrics dd span {
+    display: none;
+  }
+  .workspace-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 8px;
+  }
+  .watch-panel {
+    max-height: 52px;
+    padding: 0 12px;
+    overflow: hidden;
+  }
+  .watch-disclosure > summary {
+    top: 0;
+    min-height: 48px;
+    padding-block: 8px;
+  }
+  .workspace-grid:has(.watch-disclosure[open]) {
+    grid-template-rows: minmax(0, 1fr);
+  }
+  .workspace-grid:has(.watch-disclosure[open]) .queue-panel {
+    display: none;
+  }
+  .workspace-grid:has(.watch-disclosure[open]) .watch-panel {
+    max-height: none;
+    height: 100%;
+    overflow: auto;
+  }
+  .queue-heading {
+    padding: 8px 12px;
+  }
+  .queue-heading h2 {
+    display: none;
+  }
+  .connection {
+    min-width: 0;
+    font-size: 12px;
+  }
+  .queue-tabs {
+    min-height: 40px;
+    padding-inline: 12px;
+    gap: 12px;
+  }
+  .queue-filters {
+    padding: 8px 12px;
+    gap: 6px;
+  }
+  .queue-footer {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  .queue-footer .icon-button {
+    min-height: 36px;
+    min-width: 36px;
+  }
+  .table-wrap td {
+    padding-block: 10px;
+  }
+  .app-footer {
+    padding: 5px 16px;
+    min-height: 26px;
+    gap: 10px;
+  }
+  .app-footer > span {
+    display: none;
+  }
+  .activity-view {
+    display: block;
+  }
+  .directory > .section-heading {
+    padding: 12px;
+  }
+}
+@media (max-height: 650px) {
+  .page-heading h1 {
+    font-size: 20px;
+  }
+  .page-heading p,
+  .metrics dd span {
+    display: none;
+  }
+  .metrics {
+    padding-block: 6px;
+  }
+  .metrics dd {
+    font-size: 23px;
+  }
+  .app-container {
+    gap: 8px;
+    padding-block: 8px;
+  }
+}
+
+@media (max-height: 650px) {
+  .metrics,
+  .app-footer {
+    display: none;
+  }
+}
+
+.page-heading .breadcrumb,
+.page-heading p,
+.metrics dd span {
+  display: none;
+}
+.metrics {
+  padding-block: 10px;
+}
+.metrics dt {
+  font-size: 12px;
+}
+.metrics dd {
+  line-height: 1.15;
+}
+.page-heading {
+  min-height: 44px;
+}
+
+.queue-tabs .compact-label {
+  display: none;
+}
+@media (max-width: 760px) {
+  .page-heading {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  .queue-tabs {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 44px;
+    min-height: 44px;
+    gap: 8px;
+  }
+  .queue-tabs button {
+    min-height: 44px;
+    font-size: 12px;
+    padding: 8px 3px;
+  }
+  .queue-tabs .full-label {
+    display: none;
+  }
+  .queue-tabs .compact-label {
+    display: inline;
+  }
+  .queue-tabs .mine-filter {
+    margin-left: auto;
+    width: auto;
+  }
+}
+
+@media (max-height: 430px) {
+  .app-container {
+    overflow: auto !important;
+  }
+  .workspace-grid {
+    flex: none;
+    min-height: 360px;
+  }
+  .create-panel {
+    flex: none;
+    max-height: none;
+    overflow: visible;
+  }
+}

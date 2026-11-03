@@ -35,7 +35,7 @@ test('drafts survive closing, reopening and reloading an incident', async ({ pag
 test('keyboard actions focus search and restore a partially written incident form', async ({ page }) => {
   await page.keyboard.press('Control+k');
   await expect(page.getByRole('textbox', { name: 'Search incidents' })).toBeFocused();
-  await page.getByRole('heading', { name: 'Keep the response moving.' }).click();
+  await page.getByRole('heading', { name: 'Incidents', exact: true }).click();
   await page.keyboard.press('Alt+Shift+n');
   const form = page.getByRole('region', { name: 'Declare an incident' });
   await form.getByLabel('Incident title', { exact: false }).fill('Unfinished incident draft');
@@ -70,7 +70,7 @@ test('a concurrent-write notice stays visible after refreshing while the draft i
   test.skip(!!process.env.RELAY_DEMO, 'HTTP conflict handling is checked against the full host.');
   await page.locator('.incident-link').first().click();
   const dialog = page.getByRole('dialog');
-  const note = 'Keep the response update after a conflicting edit.';
+  const note = `Keep the response update after a conflicting edit ${Date.now()}.`;
   await dialog.getByLabel('Incident update', { exact: true }).fill(note);
   let first = true;
   await page.route('**/api/incidents/*/comments', route => {

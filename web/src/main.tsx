@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import { AppBoundary } from "./AppBoundary";
 import "./style.css";
+import "./dashboard.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

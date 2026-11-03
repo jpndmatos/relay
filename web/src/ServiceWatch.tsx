@@ -29,7 +29,7 @@ export function ServiceWatch({
     (service) => service.health !== "Operational",
   ).length;
   return (
-    <aside className="watch-panel">
+    <aside className="watch-panel" tabIndex={0} aria-label="Service watch">
       <details
         className="watch-disclosure"
         open={expanded}
