@@ -51,13 +51,17 @@ builder.Services.AddRateLimiter(o =>
     o.RejectionStatusCode = 429;
     o.AddPolicy("login", context => RateLimitPartition.GetFixedWindowLimiter(
         context.Connection.RemoteIpAddress?.ToString() ?? "unknown", _ => new FixedWindowRateLimiterOptions
-        { PermitLimit = builder.Environment.IsEnvironment("Testing") ? 200 :
+        {
+            PermitLimit = builder.Environment.IsEnvironment("Testing") ? 200 :
             builder.Configuration.GetValue<bool>("Demo:Enabled") && context.Request.Path == "/api/session/demo" ? 120 : 12,
-            Window = TimeSpan.FromMinutes(1), QueueLimit = 0 }));
+            Window = TimeSpan.FromMinutes(1),
+            QueueLimit = 0
+        }));
     o.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context => RateLimitPartition.GetFixedWindowLimiter(
         context.Connection.RemoteIpAddress?.ToString() ?? "unknown", _ => new FixedWindowRateLimiterOptions
         { PermitLimit = 600, Window = TimeSpan.FromMinutes(1), QueueLimit = 0 }));
-    o.OnRejected = async (context, ct) => {
+    o.OnRejected = async (context, ct) =>
+    {
         context.HttpContext.Response.Headers.RetryAfter = "60";
         await Results.Problem(statusCode: 429, title: "Too many requests", detail: "Wait one minute and try again.").ExecuteAsync(context.HttpContext);
     };

@@ -18,8 +18,10 @@ public sealed class RelayFactory : WebApplicationFactory<Program>
         builder.UseEnvironment("Testing");
         builder.ConfigureAppConfiguration((_, config) => config.AddInMemoryCollection(new Dictionary<string, string?>
         {
-            ["Demo:Enabled"] = demo.ToString(), ["ConnectionStrings:Relay"] = $"Data Source={database}",
-            ["Bootstrap:Email"] = "admin@relay.example", ["Bootstrap:Password"] = "Relay.Test.Account.23!"
+            ["Demo:Enabled"] = demo.ToString(),
+            ["ConnectionStrings:Relay"] = $"Data Source={database}",
+            ["Bootstrap:Email"] = "admin@relay.example",
+            ["Bootstrap:Password"] = "Relay.Test.Account.23!"
         }));
     }
     public async Task<HttpClient> Login(string role = "Commander")

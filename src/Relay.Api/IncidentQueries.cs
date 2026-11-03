@@ -21,7 +21,8 @@ public static class IncidentQueries
         var services = await db.Services.AsNoTracking().OrderBy(s => s.Name).ToListAsync(ct);
         var active = await db.Incidents.AsNoTracking().Where(i => i.Status != IncidentStatus.Resolved)
             .Select(i => new { i.ServiceId, i.Severity }).ToListAsync(ct);
-        return services.Select(s => {
+        return services.Select(s =>
+        {
             var incidents = active.Where(i => i.ServiceId == s.Id).ToArray();
             var health = incidents.Length == 0 ? "Operational" : incidents.Any(i => i.Severity == Severity.Critical) ? "Disrupted" : "Degraded";
             return new ServiceDto(s.Id, s.Name, s.Description, s.Team, s.Tier, health, incidents.Length);

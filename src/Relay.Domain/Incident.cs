@@ -36,8 +36,13 @@ public sealed class Incident
         if (!Enum.IsDefined(severity)) throw new DomainException("Choose a valid severity.");
         var incident = new Incident
         {
-            Title = title, Description = description, ServiceId = serviceId, Severity = severity,
-            CreatedAt = now, UpdatedAt = now, DueAt = now.AddMinutes(BudgetMinutes(severity)),
+            Title = title,
+            Description = description,
+            ServiceId = serviceId,
+            Severity = severity,
+            CreatedAt = now,
+            UpdatedAt = now,
+            DueAt = now.AddMinutes(BudgetMinutes(severity)),
             RequestKey = requestKey
         };
         incident.Record("created", actor, description, now);
@@ -46,7 +51,9 @@ public sealed class Incident
 
     public static int BudgetMinutes(Severity severity) => severity switch
     {
-        Severity.Critical => 30, Severity.Major => 120, Severity.Minor => 480,
+        Severity.Critical => 30,
+        Severity.Major => 120,
+        Severity.Minor => 480,
         _ => throw new DomainException("Choose a valid severity.")
     };
 
@@ -95,8 +102,15 @@ public sealed class Incident
 
     private void Touch(DateTime now) { UpdatedAt = now; Version++; }
     private void Record(string kind, string actor, string body, DateTime now) =>
-        Events.Add(new IncidentEvent { IncidentId = Id, Kind = kind, Actor = actor,
-            Body = body, CreatedAt = now, Status = Status });
+        Events.Add(new IncidentEvent
+        {
+            IncidentId = Id,
+            Kind = kind,
+            Actor = actor,
+            Body = body,
+            CreatedAt = now,
+            Status = Status
+        });
 }
 
 public sealed class IncidentEvent

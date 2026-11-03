@@ -20,8 +20,12 @@ public static class Endpoints
         api.MapGet("/session", async (HttpContext ctx, IAntiforgery csrf, UserManager<AppUser> users, IConfiguration config) =>
         {
             var user = await users.GetUserAsync(ctx.User);
-            return Results.Ok(new { user = user is null ? null : await Describe(user, users),
-                csrfToken = csrf.GetAndStoreTokens(ctx).RequestToken, demoEnabled = config.GetValue<bool>("Demo:Enabled") });
+            return Results.Ok(new
+            {
+                user = user is null ? null : await Describe(user, users),
+                csrfToken = csrf.GetAndStoreTokens(ctx).RequestToken,
+                demoEnabled = config.GetValue<bool>("Demo:Enabled")
+            });
         }).WithTags("Session");
         api.MapPost("/session/login", async (LoginRequest request, SignInManager<AppUser> signin, UserManager<AppUser> users) =>
         {
@@ -107,15 +111,22 @@ public static class Endpoints
                 .Select(i => new { i.Status, i.Severity, i.CreatedAt, i.ResolvedAt, i.DueAt, i.SlaBreached }).ToListAsync(ct);
             var active = incidents.Where(i => i.Status != IncidentStatus.Resolved).ToArray();
             var resolved = incidents.Where(i => i.ResolvedAt >= from).ToArray();
-            var days = Enumerable.Range(0, 7).Select(offset => {
+            var days = Enumerable.Range(0, 7).Select(offset =>
+            {
                 var date = now.Date.AddDays(offset - 6);
                 return new { date = date.ToString("yyyy-MM-dd"), opened = incidents.Count(i => i.CreatedAt.Date == date), resolved = incidents.Count(i => i.ResolvedAt?.Date == date) };
             });
-            return Results.Ok(new { active = active.Length, critical = active.Count(i => i.Severity == Severity.Critical),
-                overdue = active.Count(i => i.DueAt < now), resolvedThisWeek = resolved.Length,
+            return Results.Ok(new
+            {
+                active = active.Length,
+                critical = active.Count(i => i.Severity == Severity.Critical),
+                overdue = active.Count(i => i.DueAt < now),
+                resolvedThisWeek = resolved.Length,
                 meanResolutionMinutes = resolved.Length == 0 ? (double?)null : Math.Round(resolved.Average(i => (i.ResolvedAt!.Value - i.CreatedAt).TotalMinutes)),
-                days, recentEvents = await db.IncidentEvents.AsNoTracking().OrderByDescending(e => e.CreatedAt).Take(6)
-                    .Select(e => new { e.Id, e.IncidentId, e.Kind, e.Actor, e.Body, e.CreatedAt }).ToListAsync(ct) });
+                days,
+                recentEvents = await db.IncidentEvents.AsNoTracking().OrderByDescending(e => e.CreatedAt).Take(6)
+                    .Select(e => new { e.Id, e.IncidentId, e.Kind, e.Actor, e.Body, e.CreatedAt }).ToListAsync(ct)
+            });
         }).WithTags("Overview");
 
         var writes = secured.MapGroup("/incidents").RequireAuthorization("Respond");
@@ -141,12 +152,14 @@ public static class Endpoints
         }).WithTags("Incidents");
         writes.MapPost("/{id:guid}/transition", async (Guid id, TransitionRequest request, HttpContext ctx,
             RelayDbContext db, TimeProvider clock, IHubContext<IncidentHub> hub, CancellationToken ct) =>
-            await Mutate(id, request.Version, ctx, db, clock, hub, ct, async (incident, actor, now) => {
+            await Mutate(id, request.Version, ctx, db, clock, hub, ct, async (incident, actor, now) =>
+            {
                 incident.Transition(request.Status, request.Note, actor, now); await Task.CompletedTask;
             })).WithTags("Incidents");
         writes.MapPost("/{id:guid}/assign", async (Guid id, AssignRequest request, HttpContext ctx,
             RelayDbContext db, TimeProvider clock, IHubContext<IncidentHub> hub, UserManager<AppUser> users, CancellationToken ct) =>
-            await Mutate(id, request.Version, ctx, db, clock, hub, ct, async (incident, actor, now) => {
+            await Mutate(id, request.Version, ctx, db, clock, hub, ct, async (incident, actor, now) =>
+            {
                 var user = await users.FindByIdAsync(request.AssigneeId.ToString());
                 if (user is null || !(await users.IsInRoleAsync(user, "Commander") || await users.IsInRoleAsync(user, "Responder")))
                     throw new DomainException("Choose a user with responder permissions.");
@@ -154,7 +167,8 @@ public static class Endpoints
             })).WithTags("Incidents");
         writes.MapPost("/{id:guid}/comments", async (Guid id, CommentRequest request, HttpContext ctx,
             RelayDbContext db, TimeProvider clock, IHubContext<IncidentHub> hub, CancellationToken ct) =>
-            await Mutate(id, request.Version, ctx, db, clock, hub, ct, async (incident, actor, now) => {
+            await Mutate(id, request.Version, ctx, db, clock, hub, ct, async (incident, actor, now) =>
+            {
                 incident.Comment(request.Body, actor, now); await Task.CompletedTask;
             })).WithTags("Incidents");
     }
