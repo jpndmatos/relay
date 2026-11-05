@@ -123,6 +123,27 @@ body,
   flex: none;
   padding: 8px 16px;
 }
+@media (min-width: 1000px) {
+  .incident-link {
+    display: grid;
+    grid-template-columns: 68px minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 4px;
+    align-items: baseline;
+  }
+  .incident-link .incident-number {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .incident-link > strong {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .incident-link .incident-subline {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
 .watch-panel {
   min-height: 0;
   overflow: auto;

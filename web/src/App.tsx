@@ -75,8 +75,7 @@ const ServiceForm = lazy(() =>
 );
 
 const sourceUrl =
-  import.meta.env.VITE_SOURCE_URL ||
-  "https://jpndmatos.github.io/Portfolio/assets/downloads/relay-source.zip";
+  import.meta.env.VITE_SOURCE_URL || "https://github.com/jpndmatos/relay";
 const blankFilters: Filters = {
   q: "",
   status: "active",
@@ -168,6 +167,15 @@ export default function App() {
   );
   const setFilters = (values: Partial<Filters>) =>
     updateParams({ page: null, ...values }, true);
+  useEffect(() => {
+    if (view !== "incidents" || loading || !data) return;
+    const lastPage = Math.max(
+      1,
+      Math.ceil(data.incidents.total / data.incidents.pageSize),
+    );
+    if (filters.page > lastPage)
+      updateParams({ page: lastPage === 1 ? null : lastPage }, true);
+  }, [view, loading, data, filters.page, updateParams]);
   const clearFilters = () =>
     updateParams(
       Object.fromEntries(Object.keys(blankFilters).map((key) => [key, null])),
@@ -757,7 +765,11 @@ export default function App() {
                                     <X size={12} aria-hidden="true" />
                                   </button>
                                 )}
-                              <span>
+                              <span
+                                role="status"
+                                aria-live="polite"
+                                aria-atomic="true"
+                              >
                                 {data.incidents.total === 0
                                   ? "No matching incidents"
                                   : `${(filters.page - 1) * data.incidents.pageSize + 1}–${Math.min(filters.page * data.incidents.pageSize, data.incidents.total)} of ${data.incidents.total} incidents`}
@@ -928,7 +940,7 @@ export default function App() {
           workspace.
         </span>
         <a href={sourceUrl} target="_blank" rel="noreferrer">
-          Standalone source
+          Source on GitHub
           <ArrowUpRight size={12} aria-hidden="true" />
         </a>
         {!isLocalDemo && user && (
