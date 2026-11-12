@@ -13,5 +13,3 @@ Track incidents from triage to recovery. Assign an owner, update the timeline, a
 ```
 
 On macOS/Linux: `sh run.sh`. Open http://localhost:5180 and choose **Explore as commander**. Includes fictional incidents and local role switching. SQLite data persists between runs.
-
-.NET · Identity · EF Core · SignalR · React · TypeScript. [Development notes](docs/development.md).
